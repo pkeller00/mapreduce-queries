@@ -4,7 +4,6 @@ A Java program which implements four different queries based on the MapReduce fr
 To test our code we perofmred Exploratory Data Analysis in order to find the distrubtions of the data and thus see how well our code scales as we increase the number of records we need to access. Our program was compared against a standard Hive SQL program for any given query and time and  resoucres used were compared. For every query our pgraom perofrmed better than the Hive equivalent. 
 
 ## Queries
-## Compile
 We assume the path to hadoop folder is HADOOP_HOME and store_sales.dat is stored at STORE_SALES_PATH and store.dat stored at STORE_PATH on HDFS file system.
 
 
