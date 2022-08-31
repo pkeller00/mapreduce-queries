@@ -1,4 +1,4 @@
-CREATE EXTERNAL TABLE store(
+store(
 s_store_sk int,
 s_store_id char(16),
 s_rec_start_date date,
@@ -28,9 +28,3 @@ s_zip char(10),
 s_country varchar(20),
 s_gmt_offset decimal(5,2),
 s_tax_percentage decimal(5,2))
-ROW FORMAT DELIMITED 
-FIELDS TERMINATED BY '|'
-LOCATION '/user/cs346id12/input/40G/store';
-
-
-
