@@ -3,8 +3,8 @@ A Java program which implements four different queries based on the MapReduce fr
 
 To test our code we perofmred Exploratory Data Analysis in order to find the distrubtions of the data and thus see how well our code scales as we increase the number of records we need to access. Our program was compared against a standard Hive SQL program for any given query and time and  resoucres used were compared. For every query our pgraom perofrmed better than the Hive equivalent. 
 
-##Queries
-##Compile
+## Queries
+## Compile
 We assume the path to hadoop folder is HADOOP_HOME and store_sales.dat is stored at STORE_SALES_PATH and store.dat stored at STORE_PATH on HDFS file system.
 
 
@@ -18,26 +18,27 @@ After compialting the code you will need to run the query:
 2) {HADOOP_HOME}/bin/hdfs dfs -cat output/part-r-00000
 
 
-###1a
-####query
+### 1a
+#### query
 SELECT ss_store_sk AS store_sk, COALESCE(SUM(ss_net_paid), 0) AS net_paid FROM store_sales WHERE 
 ss_sold_date_sk >= 2451146 AND ss_sold_date <= 2451894 GROUP BY ss_store_sk ORDER BY net_paid DESC LIMIT 10;
-####run command
+#### run command
 {HADOOP_HOME}/bin/hadoop jar wc.jar Main K start_date end_date {STORE_SALES_PATH}/store_sales.dat output_directory
 
-###1b
-####query
+### 1b
+#### query
 SELECT ss_item_sk AS item_sk, COALESCE(SUM(ss_quantity), 0) AS quantity FROM store_sales WHERE ss_sold_date_sk >= 2451146 AND ss_sold_date <= 2451894 GROUP BY ss_item_sk ORDER BY quantity DESC LIMIT 10;
-####run command
+#### run command
 {HADOOP_HOME}/bin/hadoop jar wc.jar Main K start_date end_date {STORE_SALES_PATH}/store_sales.dat output_directory
 
-###1c
-####query
+### 1c
+#### query
 SELECT ss_sold_date_sk AS sold_date, COALESCE(SUM(ss_net_paid_inc_tax), 0) AS net_paid_inc_tax FROM store_sales WHERE ss_sold_date_sk >= 2451146 AND ss_sold_date <= 2451894 GROUP BY ss_sold_date_sk ORDER BY net_paid_inc_tax DESC LIMIT 10;
-####run command
+#### run command
 {HADOOP_HOME}/bin/hadoop jar wc.jar Main K start_date end_date {STORE_SALES_PATH}/store_sales.dat output_directory
 
-###2
+### 2
+#### query
 SELECT store.s_store_sk AS store_sk, store.s_floor_space AS floor_space, COALESCE(SUM(store_sales.ss_net_paid), 0) AS net_paid FROM store_sales RIGHT OUTER JOIN store ON (STORE.s_store_sk = STORE_SALES.ss_store_sk) WHERE (STORE_SALES.ss_sold_date_sk >= 2451146 AND STORE_SALES.ss_sold_date_sk <= 2451894) OR (STORE_SALES.ss_net_paid IS NULL) GROUP BY STORE.s_store_sk, STORE.s_floor_space ORDER BY STORE.s_floor_space DESC, net_paid DESC LIMIT 10;
-####
+#### run command
 {HADOOP_HOME}/bin/hadoop jar wc.jar Main K start_date end_date {STORE_SALES_PATH}/store_sales.dat {STORE_PATH}/store.dat output_directory
