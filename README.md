@@ -1,5 +1,5 @@
 # mapreduce-queries
-A Java program which implements four different queries based on the MapReduce framework. These were perfomed on a the TCP-DS benchmark dataset in the 1GB and 40GB (approximately 10 million records) scale, however the code is still compatible with larger scalling factors. 
+A Java program which implements four different queries based on the MapReduce framework. These were perfomed on a the TCP-DS benchmark dataset in the 1GB and 40GB (approximately 10 million records) scale, however the code is still compatible with larger scalling factors. We chose to focus on the store and store_sales table, whose schema can be seen in the schema folder. 
 
 To test our code we perofmred Exploratory Data Analysis in order to find the distrubtions of the data and thus see how well our code scales as we increase the number of records we need to access. Our program was compared against a standard Hive SQL program for any given query and time and  resoucres used were compared. For every query our pgraom perofrmed better than the Hive equivalent. 
 
